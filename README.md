@@ -1,10 +1,10 @@
-# llmsed
+# llsed
 
 A high-performance HTTP proxy for translating between different LLM API formats (OpenAI, Anthropic, OpenRouter, etc.) using lazy-loaded JSON-RPC transformation hooks.
 
 ## Overview
 
-`llmsed` acts as a transparent proxy that sits between your application and LLM API providers. It transforms requests and responses on-the-fly using external JSON-RPC services, allowing you to:
+`llsed` acts as a transparent proxy that sits between your application and LLM API providers. It transforms requests and responses on-the-fly using external JSON-RPC services, allowing you to:
 
 - Use OpenAI-formatted clients with Claude/Anthropic APIs
 - Normalize different API formats to a common interface
@@ -16,7 +16,7 @@ A high-performance HTTP proxy for translating between different LLM API formats 
 ```
 Client Request
     ↓
-llmsed (proxy)
+llsed (proxy)
     ↓
 Pre-transform (JSON-RPC) ← optional, lazy-loaded
     ↓
@@ -29,17 +29,17 @@ Client Response
 
 ## Installation
 ```bash
-go build -o llmsed llmsed.go
+go build -o llsed llsed.go
 ```
 
 Or run directly:
 ```bash
-go run llmsed.go [flags]
+go run llsed.go [flags]
 ```
 
 ## Usage
 ```bash
-llmsed --host 0.0.0.0 \
+llsed --host 0.0.0.0 \
        --port 8080 \
        --map_file config.json \
        --server https://api.openai.com
@@ -186,12 +186,12 @@ python pre_transform.py
 node post_transform.js
 ```
 
-2. Start llmsed:
+2. Start llsed:
 ```bash
-llmsed --server https://api.anthropic.com --port 8080
+llsed --server https://api.anthropic.com --port 8080
 ```
 
-3. Point your OpenAI client at llmsed:
+3. Point your OpenAI client at llsed:
 ```python
 from openai import OpenAI
 
