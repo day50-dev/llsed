@@ -1,26 +1,15 @@
 {
+  "transformer": [ "python", "transform.py"],
   "rules": [
     {
       "tag": "chat_completions",
-      "from": "anthropic",
-      "to": "openai",
-      "endpoints": {
-        "from": "/v1/messages",
-        "to": "/v1/chat/completions"
-      },
-      "pre": "http://localhost:9001",
-      "post": "http://localhost:9001"
+      "from": "/v1/messages",
+      "to": "/v1/chat/completions"
     },
     {
       "tag": "list_models",
-      "from": "anthropic",
-      "to": "openai",
-      "endpoints": {
-        "from": "/v1/models",
-        "to": "/v1/models"
-      },
-      "pre": "http://localhost:9001",
-      "post": "http://localhost:9001"
+      "from": "/v1/models",
+      "to": "/v1/models"
     }
   ]
 }
