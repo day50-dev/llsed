@@ -4,7 +4,7 @@ A high-performance HTTP proxy for translating between different LLM API formats 
 
 ## Overview
 
-`llsed` acts as a transparent proxy that sits between your application and LLM API providers. It transforms requests and responses on-the-fly using external JSON-RPC services, allowing you to:
+`llsed` acts as a transparent proxy that sits between your application and LLM API providers. It transforms requests and responses on-the-fly using a tranforms JSON which can use templated strings to do transforms and external JSON-RPC services where they can't, allowing you to:
 
 - Use OpenAI-formatted clients with Claude/Anthropic APIs
 - Normalize different API formats to a common interface
