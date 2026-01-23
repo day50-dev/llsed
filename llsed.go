@@ -12,6 +12,14 @@ import (
 	"strings"
 )
 
+func usage() {
+	fmt.Fprintf(os.Stderr, "llsed: A high-performance HTTP proxy for translating between different LLM API formats.\n")
+	fmt.Fprintf(os.Stderr, "Usage: llsed [flags]\n")
+	fmt.Fprintf(os.Stderr, "Flags:\n")
+	flag.PrintDefaults()
+	os.Exit(2)
+}
+
 type TransformRule struct {
 	Tag    string                 `json:"tag"`
 	From   string                 `json:"from"`
@@ -205,18 +213,23 @@ func main() {
 	server := flag.String("server", "https://api.openai.com", "Target server URL")
 	flag.Parse()
 
+	if flag.NArg() > 0 {
+		usage()
+		return
+	}
+
 	// Trim trailing slash from server URL
 	*server = strings.TrimSuffix(*server, "/")
 
-	llmsed, err := NewLLMSed(*mapFile, *server)
+	llsed, err := NewLLMSed(*mapFile, *server)
 	if err != nil {
-		log.Fatalf("Failed to initialize llmsed: %v", err)
+		log.Fatalf("Failed to initialize llsed: %v", err)
 	}
 
 	addr := fmt.Sprintf("%s:%d", *host, *port)
-	log.Printf("Starting llmsed on %s, proxying to %s", addr, *server)
+	log.Printf("Starting llsed on %s, proxying to %s", addr, *server)
 
-	http.HandleFunc("/", llmsed.handleProxy)
+	http.HandleFunc("/", llsed.handleProxy)
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		log.Fatalf("Server failed: %v", err)
 	}
