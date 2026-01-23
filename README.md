@@ -1,6 +1,6 @@
 # llsed
 
-A high-performance HTTP proxy for translating between different LLM API formats (OpenAI, Anthropic, OpenRouter, etc.) using lazy-loaded JSON-RPC transformation hooks.
+A high-performance HTTP proxy for translating between different LLM API formats (OpenAI, Anthropic, Bedrock, etc.) using lazy-loaded JSON-RPC transformation hooks.
 
 ## Overview
 
